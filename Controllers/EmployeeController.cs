@@ -49,14 +49,27 @@ namespace leaveManAPI.Controllers
         }
 
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public ActionResult<Employee> Put(int id, [FromBody] Employee employee)
         {
-            
+            var emp = _db.Employees.FirstOrDefault(a => a.Id == id);
+            emp.Id = employee.Id;
+            emp.Name = employee.Name;
+            emp.Email = employee.Email;
+            emp.DOB = employee.DOB;
+            emp.DOJ = employee.DOJ;
+            emp.Salary = employee.Salary;
+            emp.Role = employee.Role;
+            emp.TotalLeave = employee.TotalLeave;
+            _db.SaveChanges();
+            return Ok(emp);
         }
 
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
+            var emp = _db.Employees.FirstOrDefault(a => a.Id == id);
+           _db.Employees.Remove(emp);
+           _db.SaveChanges();
            
         }
     }

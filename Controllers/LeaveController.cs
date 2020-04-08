@@ -58,15 +58,22 @@ namespace leaveManAPI.Controllers
         }
 
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public ActionResult<Leave> Put(int id, [FromBody] Leave leave)
         {
-
+            var l = _db.Leaves.FirstOrDefault(a => a.Id == id);
+            l.Id = leave.Id;
+            l.Name = leave.Name;
+            l.MaxLeaves = leave.MaxLeaves;
+            _db.SaveChanges();
+            return Ok(l);
         }
 
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
-
+            var l = _db.Leaves.FirstOrDefault(a => a.Id == id);
+            _db.Leaves.Remove(l);
+            _db.SaveChanges();
         }
 
     }
