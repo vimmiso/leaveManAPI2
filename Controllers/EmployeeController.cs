@@ -52,7 +52,6 @@ namespace leaveManAPI.Controllers
         public ActionResult<Employee> Put(int id, [FromBody] Employee employee)
         {
             var emp = _db.Employees.FirstOrDefault(a => a.Id == id);
-            emp.Id = employee.Id;
             emp.Name = employee.Name;
             emp.Email = employee.Email;
             emp.DOB = employee.DOB;
