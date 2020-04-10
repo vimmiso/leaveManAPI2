@@ -61,7 +61,6 @@ namespace leaveManAPI.Controllers
         public ActionResult<Leave> Put(int id, [FromBody] Leave leave)
         {
             var l = _db.Leaves.FirstOrDefault(a => a.Id == id);
-            l.Id = leave.Id;
             l.Name = leave.Name;
             l.MaxLeaves = leave.MaxLeaves;
             _db.SaveChanges();

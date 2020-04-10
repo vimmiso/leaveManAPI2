@@ -57,8 +57,12 @@ namespace leaveManAPI.Controllers
         }
 
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public ActionResult<EmpLeaveMapping> Put(int id, [FromBody] EmpLeaveMapping empleave)
         {
+            var map = _db.EmpLeaveMappings.FirstOrDefault(a => a.Id == id);
+            map.Status = empleave.Status;
+            _db.SaveChanges();
+            return Ok(empleave);
 
         }
 
